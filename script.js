@@ -17,10 +17,20 @@ let tabla=`<table class="table table-striped  mt-5 ">
         <th>Bases de datos</th>
         <th>Entornos de desarrollo</th>
         <th>Sistemas informáticos</th>
+        <th>Media</th>
     </tr>
 </thead>
 <tbody >`;
 let alumnos= Object.keys(datos.alumnos).length;
+let notas=[];
+for(let i=0;i<alumnos;i++){
+  notas.push(datos.alumnos[i].notas);
+   
+}
+
+
+let media=notaMedia(notas,alumnos);
+console.log(media)
 for(let i=0;i<alumnos;i++){
     tabla +=`
     <tr>
@@ -32,27 +42,17 @@ for(let i=0;i<alumnos;i++){
     <td>${datos.alumnos[i].notas.BD} ${notasTexto(datos.alumnos[i].notas.BD)}</td>
     <td>${datos.alumnos[i].notas.ED} ${notasTexto(datos.alumnos[i].notas.ED)}</td>
     <td>${datos.alumnos[i].notas.SI} ${notasTexto(datos.alumnos[i].notas.SI)}</td>
+    <td>${media[i]+" ("+notasTexto(media[i])+")"}</td>
+
+
   </tr>
     `;
 }
 tabla+=` </tbody>
 </table>`;
-let notas=[];
-for(let i=0;i<alumnos;i++){
-  notas.push(datos.alumnos[i].notas);
-   
-}
 
 contenido.innerHTML=tabla;
-let media=notaMedia(notas,alumnos);
 
-
-let textoMedia= `<ul class="list-group"  > <li class="list-group-item active list-group-item-success">Nota media</li>`;
-for(let i=0;i<alumnos;i++){
-    textoMedia +=`<li class="list-group-item list-group-item-action"> ${datos.alumnos[i].nombre+" "+datos.alumnos[i].apellido+ " tiene una media de "+ media[i]+" ("+notasTexto(media[i])+")</li>"}`;
-}
-textoMedia+=`</ul>`;
-contenidoMedia.innerHTML=textoMedia;
 
 
 
@@ -73,6 +73,7 @@ botonBuscarAlumno.addEventListener("click",()=>{
             <th>Bases de datos</th>
             <th>Entornos de desarrollo</th>
             <th>Sistemas informáticos</th>
+            <th>Media</th>
         </tr>
     </thead>
     <tbody >
@@ -90,6 +91,8 @@ botonBuscarAlumno.addEventListener("click",()=>{
             <td>${datos.alumnos[i].notas.BD} ${notasTexto(datos.alumnos[i].notas.BD)}</td>
             <td>${datos.alumnos[i].notas.ED} ${notasTexto(datos.alumnos[i].notas.ED)}</td>
             <td>${datos.alumnos[i].notas.SI} ${notasTexto(datos.alumnos[i].notas.SI)}</td>
+            <td>${media[i]+" ("+notasTexto(media[i])+")"}</td>
+
         </tr>
             `;
         
